@@ -1,0 +1,79 @@
+自己发的贴，自己结贴吧。
+先判断是否打开：
+int flag =Settings.System.getInt(context.getContentResolver(),Settings.System.ACCELEROMETER_ROTATION, 0);
+打开关闭，关闭打开：
+Settings.System.putInt(context.getContentResolver(),Settings.System.ACCELEROMETER_ROTATION,flag==1?0:1);
+就这两句代码，要是有什么不懂的可以提问，有什么错的欢迎指出。
+
+http://blog.csdn.net/xiaxiangnanxp1989/article/details/8244346
+
+
+启动程序
+01-13 22:57:58.203 846-846/android.demo D/SingleInstanceActivity: -----> onCreate----
+01-13 22:57:58.203 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:57:58.203 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:57:58.203 846-846/android.demo D/AFragment: -----> onCreateView----
+01-13 22:57:58.226 846-846/android.demo D/AFragment: -----> onActivityCreated----
+01-13 22:57:58.226 846-846/android.demo D/SingleInstanceActivity: -----> onStart----
+01-13 22:57:58.226 846-846/android.demo D/AFragment: -----> onStart----
+01-13 22:57:58.226 846-846/android.demo D/SingleInstanceActivity: -----> onResume----
+01-13 22:57:58.226 846-846/android.demo D/AFragment: -----> onResume----
+
+
+竖屏变为横
+01-13 22:58:26.384 846-846/android.demo D/AFragment: -----> onPause----
+01-13 22:58:26.384 846-846/android.demo D/SingleInstanceActivity: -----> onPause----
+01-13 22:58:26.467 846-846/android.demo D/AFragment: -----> onStop----
+01-13 22:58:26.470 846-846/android.demo D/SingleInstanceActivity: -----> onStop----
+01-13 22:58:26.470 846-846/android.demo D/AFragment: -----> onDestroyView----
+01-13 22:58:26.470 846-846/android.demo D/AFragment: -----> onDestroy----
+01-13 22:58:26.470 846-846/android.demo D/AFragment: -----> onDetach----
+01-13 22:58:26.470 846-846/android.demo D/SingleInstanceActivity: -----> onDestroy----
+01-13 22:58:26.484 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:58:26.484 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:58:26.490 846-846/android.demo D/SingleInstanceActivity: -----> onCreate----
+01-13 22:58:26.490 846-846/android.demo D/AFragment: -----> onCreateView----
+01-13 22:58:26.504 846-846/android.demo D/AFragment: -----> onActivityCreated----
+01-13 22:58:26.507 846-846/android.demo D/AFragment: -----> onDestroyView----
+01-13 22:58:26.507 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:58:26.507 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:58:26.507 846-846/android.demo D/AFragment: -----> onCreateView----
+01-13 22:58:26.517 846-846/android.demo D/AFragment: -----> onActivityCreated----
+01-13 22:58:26.517 846-846/android.demo D/SingleInstanceActivity: -----> onStart----
+01-13 22:58:26.517 846-846/android.demo D/AFragment: -----> onStart----
+01-13 22:58:26.517 846-846/android.demo D/SingleInstanceActivity: -----> onResume----
+01-13 22:58:26.520 846-846/android.demo D/AFragment: -----> onResume----
+
+横屏变为竖屏
+01-13 22:59:07.034 846-846/android.demo D/AFragment: -----> onPause----
+01-13 22:59:07.034 846-846/android.demo D/SingleInstanceActivity: -----> onPause----
+01-13 22:59:07.088 846-846/android.demo D/AFragment: -----> onStop----
+01-13 22:59:07.088 846-846/android.demo D/SingleInstanceActivity: -----> onStop----
+01-13 22:59:07.088 846-846/android.demo D/AFragment: -----> onDestroy----
+01-13 22:59:07.088 846-846/android.demo D/AFragment: -----> onDetach----
+01-13 22:59:07.088 846-846/android.demo D/AFragment: -----> onDestroyView----
+01-13 22:59:07.091 846-846/android.demo D/AFragment: -----> onDestroy----
+01-13 22:59:07.091 846-846/android.demo D/AFragment: -----> onDetach----
+01-13 22:59:07.091 846-846/android.demo D/SingleInstanceActivity: -----> onDestroy----
+01-13 22:59:07.118 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:59:07.121 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:59:07.121 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:59:07.121 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:59:07.124 846-846/android.demo D/SingleInstanceActivity: -----> onCreate----
+01-13 22:59:07.124 846-846/android.demo D/AFragment: -----> onCreateView----
+01-13 22:59:07.138 846-846/android.demo D/AFragment: -----> onActivityCreated----
+01-13 22:59:07.141 846-846/android.demo D/AFragment: -----> onDestroyView----
+01-13 22:59:07.141 846-846/android.demo D/AFragment: -----> onAttach----
+01-13 22:59:07.141 846-846/android.demo D/AFragment: -----> onCreate----
+01-13 22:59:07.141 846-846/android.demo D/AFragment: -----> onCreateView----
+01-13 22:59:07.154 846-846/android.demo D/AFragment: -----> onActivityCreated----
+01-13 22:59:07.154 846-846/android.demo D/SingleInstanceActivity: -----> onStart----
+01-13 22:59:07.154 846-846/android.demo D/AFragment: -----> onStart----
+01-13 22:59:07.158 846-846/android.demo D/SingleInstanceActivity: -----> onResume----
+01-13 22:59:07.158 846-846/android.demo D/AFragment: -----> onResume----
+
+
+Android横竖屏切换总结
+http://blog.csdn.net/ouyang_peng/article/details/9282965
+
+http://blog.csdn.net/junhuahouse/article/details/38109125
