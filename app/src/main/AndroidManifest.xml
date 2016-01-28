@@ -17,21 +17,20 @@
         </activity>
 
         <activity android:name=".fragment.communicate.activity_fragment.CommunicateMainActivity">
-
-
         </activity>
 
 
         <activity
             android:name=".fragment.singleInstance.SingleInstanceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
 
+        <activity android:name=".webview.flip_conflict.WebViewFlictConflictActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
     </application>
 

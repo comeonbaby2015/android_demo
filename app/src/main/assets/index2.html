@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Activity简单几步支持向右滑动返回 &#8211; Android开发中文站</title>
+<script>
+window._deel = {
+    name: 'Android开发中文站',
+    url: 'http://www.androidchina.net/wp-content/themes/d8',
+    rss: '',
+    ajaxpager: '',
+    maillist: '',
+    maillistCode: '',
+    commenton: 1,
+    roll: [,]
+}
+</script>
+<link rel='stylesheet' id='style-css'  href='http://www.androidchina.net/wp-content/themes/d8/style.css?ver=3.0' type='text/css' media='all' />
+<link rel='stylesheet' id='smartideo_css-css'  href='http://www.androidchina.net/wp-content/plugins/smartideo/static/smartideo.css?ver=2.0.4' type='text/css' media='screen' />
+<link rel='prev' title='产品运营：新产品如何从1做到100W？' href='http://www.androidchina.net/2726.html' />
+<link rel='next' title='微信公众号运营手册（完整版）数十万互联网从业者的共同关注！' href='http://www.androidchina.net/2763.html' />
+<link rel='canonical' href='http://www.androidchina.net/2655.html' />
+<link rel='shortlink' href='http://www.androidchina.net/?p=2655' />
+<meta name="keywords" content="Activity, 右滑, 开发进阶">
+<meta name="description" content="向右滑动返回，对于屏幕过大的手机来说，在单手操作时，是一个不错的用户体验，用户不必再费力的或者用另一个手去点击屏幕左上角的返回按钮或者，手机右下角的返回按钮，轻轻向右滑动屏幕即可返回上一页，这个功能如今大部分APP都已经支持啦，你的APP支持了吗？  自己在网上百度了一些滑动返回的方法，有的是用的第三方控件如swipebackLayout但弊端过大如与自己自定义的一些控件冲突等，有的是通过判断手势监听但步骤相当繁琐，总之没有尽如人意的，">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<!--[if lt IE 9]><script src="http://www.androidchina.net/wp-content/themes/d8/js/html5.js"></script><![endif]-->
+</head>
+<body class="single single-post postid-2655 single-format-standard" bgcolor="#00FF00">
+<header class="header">
+	<div class="navbar">
+		<div class="logo" style="width:280px"><a href="http://www.androidchina.net" title="Android开发中文站---关注Android，关注开发者">Android开发中文站</a></div>
+		<ul class="nav">
+			<li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-4"><a href="http://www.androidchina.net">首页</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-14"><a href="http://www.androidchina.net/category/info">热点资讯</a></li>
+<li id="menu-item-6" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-has-children menu-item-6"><a href="http://www.androidchina.net/category/dev">Android开发</a>
+<ul class="sub-menu">
+	<li id="menu-item-380" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-380"><a href="http://www.androidchina.net/category/java">Java基础</a></li>
+	<li id="menu-item-36" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36"><a href="http://www.androidchina.net/dev/beginner">新手入门</a></li>
+	<li id="menu-item-13" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-13"><a href="http://www.androidchina.net/dev/advance">开发进阶</a></li>
+	<li id="menu-item-12" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12"><a href="http://www.androidchina.net/dev/android_source">源码下载</a></li>
+</ul>
+</li>
+<li id="menu-item-7" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7"><a href="http://www.androidchina.net/category/profit">盈利指导</a></li>
+<li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202"><a href="http://www.androidchina.net/aboutus">关于AndroidChina</a></li>
+		</ul>
+		<div class="menu pull-right">
+			<form method="get" class="dropdown search-form" action="http://www.androidchina.net/" >
+				<input class="search-input" name="s" type="text" placeholder="输入关键字搜索" autofocus="" x-webkit-speech=""><input class="btn btn-success search-submit" type="submit" value="搜索">
+				<ul class="dropdown-menu search-suggest"></ul>
+			</form>
+			<div class="btn-group pull-left">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#feed">订阅</button>
+								<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">关注 <i class="caret"></i></button>
+				<ul class="dropdown-menu pull-right">
+										<li><a href="http://weibo.com/itmanual" target="_blank">新浪微博</a></li>														</ul>
+							</div>
+		</div>
+	</div>
+	<div class="speedbar">
+					<div class="pull-right">
+				<i class="icon-user icon12"></i> <a href="http://www.androidchina.net/wp-login.php">登录</a>			</div>
+				<div class="toptip"><strong class="text-success">最新消息：</strong>欢迎访问Android开发中文站！联系QQ：1304524325</div>
+	</div>
+</header>
+<section class="container">
+	<div class="content-wrap">
+	<div class="content">
+		<div class="breadcrumbs">你的位置：<a href="http://www.androidchina.net">Android开发中文站</a> <small>></small> <a href="http://www.androidchina.net/category/dev" title="查看Android开发中的全部文章">Android开发</a> <small>></small> <a href="http://www.androidchina.net/dev/advance" title="查看开发进阶中的全部文章">开发进阶</a> <small>></small> <span class="muted">Activity简单几步支持向右滑动返回</span></div>
+				<header class="article-header">
+			<h1 class="article-title"><a href="http://www.androidchina.net/2655.html">Activity简单几步支持向右滑动返回</a></h1>
+			<div class="meta">
+				<span class="muted"><a href="http://www.androidchina.net/dev/advance"><i class="icon-list-alt icon12"></i> 开发进阶</a></span>				<span class="muted"><i class="icon-user icon12"></i> <a href="http://www.androidchina.net/author/androidchina">AndroidChina</a></span>
+				<time class="muted"><i class="ico icon-time icon12"></i> 7个月前 (06-24)</time>
+				<span class="muted"><i class="ico icon-eye-open icon12"></i> 2575浏览</span>
+				<span class="muted"><i class="icon-comment icon12"></i> <a href="http://www.androidchina.net/2655.html#comments">0评论</a></span>							</div>
+		</header>
+
+				
+		<article class="article-content">
+			<p>向右滑动返回，对于屏幕过大的手机来说，在单手操作时，是一个不错的用户体验，用户不必再费力的或者用另一个手去点击屏幕左上角的返回按钮或者，手机右下角的返回按钮，轻轻向右滑动屏幕即可返回上一页，这个功能如今大部分APP都已经支持啦，你的APP支持了吗？</p>
+<p>自己在网上百度了一些滑动返回的方法，有的是用的第三方控件如swipebackLayout但弊端过大如与自己自定义的一些控件冲突等，有的是通过判断手势监听但步骤相当繁琐，总之没有尽如人意的，本篇所讲的实现方法其实也是通过监听事件分发来实现的，但是步骤非常简单，且效果经本人不断测试也相当不错，接下来本人讲解下实现过程：</p>
+<p>实现该功能需同时满足几个条件，并要考虑用户的操作意图，既要保证足够的灵敏度，不要出现向右滑动好多次还没返回上一页的情况，也不要出现本来是想上下滑动（斜着上下滑动）而非向右滑动返回，也被判断为向右滑动返回而结束了当前界面，那么我们需要满足：</p>
+<p>1.用户需向右滑动一段距离，且X轴距离&gt;某一设定的值；</p>
+<p>2.因为向右滑动时，不可能时严格的水平方向而不向Y轴偏移，所以向Y轴的偏移量不能超过某一设定的值，否则认为用户意图不是滑动返回而是上下滑动；</p>
+<p><img class="aligncenter" alt="" src="http://img.blog.csdn.net/20150608172357491?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFpeXVsaWFuZzIwMTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" /></p>
+<p>3.在测试过程中，如果用户意图是上下滑动时，那么手指在y轴移动速度（我们按每秒移动的像素值，可通过VelocityTracker类计算）非常大，通常在几千到过万，而在正常的水平滑动时，y轴的移动速度通常只有100左右，因此，我们需要判断的是，如果y轴上手指滑动速度超过某一设定值（本人将该值设置为了1000），则认为用户意图是上下滑动而非向右滑动返回；</p>
+<p>好了，接下来我们便可自定义一个SlideBackActivity继承Activity，并在SlideBackActivity中重写事件分发dispatchTouchEvent，并记录手指按下，移动的距离及手指滑动速度，从而判断用户的意图，完整代码：</p>
+<div>
+<div>
+<div>
+<pre class="brush: java; title: ; notranslate" title="">
+/**
+* 支持滑动返回
+* 继承该Activity则支持滑动返回
+* @author 白玉梁
+*/
+public class SlideBackActivity extends Activity{
+
+     //手指上下滑动时的最小速度
+     private static final int YSPEED_MIN = 1000;
+
+     //手指向右滑动时的最小距离
+     private static final int XDISTANCE_MIN = 50;
+
+     //手指向上滑或下滑时的最小距离
+     private static final int YDISTANCE_MIN = 100;
+
+     //记录手指按下时的横坐标。
+     private float xDown;
+
+     //记录手指按下时的纵坐标。
+     private float yDown;
+
+     //记录手指移动时的横坐标。
+     private float xMove;
+
+     //记录手指移动时的纵坐标。
+     private float yMove;
+
+     //用于计算手指滑动的速度。
+     private VelocityTracker mVelocityTracker;
+
+     @Override
+     public boolean dispatchTouchEvent(MotionEvent event) {
+          createVelocityTracker(event);
+          switch (event.getAction()) {
+          case MotionEvent.ACTION_DOWN:
+                xDown = event.getRawX();
+                yDown = event.getRawY();
+                break;
+          case MotionEvent.ACTION_MOVE:
+                xMove = event.getRawX();
+                yMove= event.getRawY();
+                //滑动的距离
+                int distanceX = (int) (xMove - xDown);
+                int distanceY= (int) (yMove - yDown);
+                //获取顺时速度
+                int ySpeed = getScrollVelocity();
+                //关闭Activity需满足以下条件：
+                //1.x轴滑动的距离&gt;XDISTANCE_MIN
+                //2.y轴滑动的距离在YDISTANCE_MIN范围内
+                //3.y轴上（即上下滑动的速度）&lt;XSPEED_MIN，如果大于，则认为用户意图是在上下滑动而非左滑结束Activity
+                if(distanceX &gt; XDISTANCE_MIN &amp;&amp;(distanceY&lt;YDISTANCE_MIN&amp;&amp;distanceY&gt;-YDISTANCE_MIN)&amp;&amp; ySpeed &lt; YSPEED_MIN) {
+                      finish();
+                }
+                break;
+          case MotionEvent.ACTION_UP:
+                recycleVelocityTracker();
+                break;
+          default:
+                break;
+          }
+          return super.dispatchTouchEvent(event);
+    }
+
+    /**
+      * 创建VelocityTracker对象，并将触摸界面的滑动事件加入到VelocityTracker当中。
+      *
+      * @param event
+      *
+      */
+    private void createVelocityTracker(MotionEvent event) {
+         if (mVelocityTracker == null) {
+                mVelocityTracker = VelocityTracker.obtain();
+         }
+         mVelocityTracker.addMovement(event);
+    }
+
+    /**
+      * 回收VelocityTracker对象。
+      */
+    private void recycleVelocityTracker() {
+          mVelocityTracker.recycle();
+          mVelocityTracker = null;
+    }
+
+    /**
+      *
+      * @return 滑动速度，以每秒钟移动了多少像素值为单位。
+      */
+    private int getScrollVelocity() {
+          mVelocityTracker.computeCurrentVelocity(1000);
+          int velocity = (int) mVelocityTracker.getYVelocity();
+          return Math.abs(velocity);
+    }
+
+}
+</pre>
+</div>
+</div>
+</div>
+<p>转载请注明：<a href="http://www.androidchina.net">Android开发中文站</a> &raquo; <a href="http://www.androidchina.net/2655.html">Activity简单几步支持向右滑动返回</a></p>		</article>
+
+		
+		<footer class="article-footer">
+			<div class="article-tags">继续浏览有关 <a href="http://www.androidchina.net/tag/activity" rel="tag">Activity</a><a href="http://www.androidchina.net/tag/%e5%8f%b3%e6%bb%91" rel="tag">右滑</a> 的文章</div>			<div class="share"><div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare"><span class="share-tit">分享此文到：</span><a class="bds_qzone"></a><a class="bds_tqq"></a><a class="bds_tsina"></a><a class="bds_sqq"></a><a class="bds_tqf"></a><a class="bds_renren"></a><a class="bds_mshare"></a><a class="bds_youdao"></a><a class="bds_mail"></a><span class="bds_more"></span><a class="shareCount"></a></div></div>		</footer>
+
+		<nav class="article-nav">
+			<span class="article-nav-prev">上一篇 <a href="http://www.androidchina.net/2726.html" rel="prev">产品运营：新产品如何从1做到100W？</a></span>
+			<span class="article-nav-next"><a href="http://www.androidchina.net/2763.html" rel="next">微信公众号运营手册（完整版）数十万互联网从业者的共同关注！</a> 下一篇</span>
+		</nav>
+
+		<div class="relates">
+			<h3>与本文相关的文章</h3>
+			<ul>
+<li><a href="http://www.androidchina.net/756.html">基础总结篇之三：Activity的task相关</a></li><li><a href="http://www.androidchina.net/752.html">基础总结篇之二：Activity的四种launchMode</a></li><li><a href="http://www.androidchina.net/750.html">基础总结篇之一：Activity生命周期</a></li><li><a href="http://www.androidchina.net/4177.html">xUtils更新到3.0后的基本使用规则</a></li><li><a href="http://www.androidchina.net/4254.html">Android内存泄漏终极解决篇（下）</a></li><li><a href="http://www.androidchina.net/4252.html">Android内存泄漏终极解决篇（上）</a></li><li><a href="http://www.androidchina.net/3928.html">Android自定义控件：下拉菜单的实现与优化</a></li><li><a href="http://www.androidchina.net/4130.html">Android应用架构变更背后的经验、失误与推论</a></li><li><a href="http://www.androidchina.net/3849.html">携程Android App插件化和动态加载实践</a></li><li><a href="http://www.androidchina.net/4017.html">Android WebView页面加载优化</a></li><li><a href="http://www.androidchina.net/3006.html">Android 插件化框架 DynamicLoadApk 源码解析</a></li><li><a href="http://www.androidchina.net/4089.html">实践自定义UI－ViewGroup</a></li></ul>		</div>
+
+		<div class="banner banner-related"><script type="text/javascript">
+    /*960*90 创建于 2015-07-04*/
+    var cpro_id = "u2187859";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div>
+		<div id="respond" class="no_webshot">
+		<h3 class="queryinfo">
+		您必须 <a href="http://www.androidchina.net/wp-login.php?redirect_to=http%3A%2F%2Fwww.androidchina.net%2F2655.html">登录</a> 才能发表评论！	</h3>
+	</div>
+
+		
+	</div>
+</div>
+<aside class="sidebar">	
+<div class="widget d_textbanner"><a class="style02" href="http://www.imooc.com/mobile/imooc_3.6.1_10102084_android.apk" target="_blank"><strong>慕课网APP</strong><h2>学IT，就来慕课网！</h2><p><b>国内首家免费的IT技能学习、交流平台，IT学习必备之选。</b><br>
+ 1、课程全部免费，内容丰富，专业实用。<br>
+      
+       2、短视频为主，支持离线下载，碎片化时间学习。<br>
+      
+       3、视频高清流畅，全程无广告，为用户营造绿色的学习环境。 <br>                                     
+       4、支持课程讨论、笔记记录等特色功能。<br></p></a></div><div class="widget d_textbanner"><a class="style01" href="http://www.androidchina.net/wp-content/uploads/2014/09/AndroidChina_v1.0.apk"><strong>特别推荐</strong><h2>Android开发中文站客户端</h2><p><b>网站的Android客户端，可以通过手机查看网站内容啦！
+欢迎大家下载使用。</b><br><br>
+<b>Andriod开发中文站，关注Andriod开发，更关注开发者！</b></p></a></div><div class="widget d_textbanner"><a class="style05" href="http://www.androidchina.net/contributor" target="_blank"><strong>特别推荐</strong><h2>投稿人招募</h2><p>想让自己的文章发表在Android开发中文站？快快联系站长提升账号权限就能发表拉！可以转载文章，更鼓励原创文章！联系QQ：1304524325</p></a></div><div class="widget widget_text"><h3 class="widget_tit">本站微信号：AndroidChinaNet</h3>			<div class="textwidget"><html>
+<body align="center">
+<img src="http://www.androidchina.net/wp-content/uploads/2015/07/qrcode_for_gh_749c150c6d1d_258.jpg"  width="216" height="216"/>
+</body>
+</html></div>
+		</div><div class="widget d_banner"><div class="d_banner_inner"><script type="text/javascript">
+    /*360*300 创建于 2015-07-04*/
+    var cpro_id = "u2187876";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div></div><div class="widget d_postlist"><h3 class="widget_tit">猜你喜欢</h3><ul><li><a href="http://www.androidchina.net/1375.html"><span class="thumbnail"><img src="http://img.blog.csdn.net/20141009221939824?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZmVuZ3l1emhlbmdmYW4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Android开发之裁剪照片" /></span><span class="text">Android开发之裁剪照片</span><span class="muted">2015-01-13</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/1776.html"><span class="thumbnail"><img src="http://img.blog.csdn.net/20150224183112721" alt="Android 事件处理全面剖析" /></span><span class="text">Android 事件处理全面剖析</span><span class="muted">2015-07-11</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/240.html"><span class="thumbnail"><img src="http://www.apkbus.com/data/attachment/portal/201404/01/095704wfek9feafbfhqfcm.jpg" alt="谷歌升级 Android 开发者政策：规定更严格" /></span><span class="text">谷歌升级 Android 开发者政策：规定更严格</span><span class="muted">2014-04-03</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/2293.html"><span class="thumbnail"><img src="http://img.yixieshi.com/103QL158-0.png" alt="超完整的用户体验设计流程，规范化提升产品" /></span><span class="text">超完整的用户体验设计流程，规范化提升产品</span><span class="muted">2015-05-08</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/1388.html"><span class="thumbnail"><img src="http://www.androidchina.net/wp-content/uploads/2014/09/4ce6d6b4f5fdf27093570645d03ebac2-220x150.jpg" alt="ScrollView添加提示Arrow(箭头)" /></span><span class="text">ScrollView添加提示Arrow(箭头)</span><span class="muted">2014-12-31</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/2570.html"><span class="thumbnail"><img src="http://img.yixieshi.com/135035Ba-1.jpg!680" alt="我混得不好，原来是毕业照位置站错了！" /></span><span class="text">我混得不好，原来是毕业照位置站错了！</span><span class="muted">2015-05-29</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/2129.html"><span class="thumbnail"><img src="http://img.blog.csdn.net/20150406102854189?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW5kcm9pZF9qaWFuZ2p1bg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="Android NDK编写一个HelloWorld" /></span><span class="text">Android NDK编写一个HelloWorld</span><span class="muted">2015-04-28</span><span class="muted"></span></a></li>
+<li><a href="http://www.androidchina.net/1891.html"><span class="thumbnail"><img src="http://p1.pstatp.com/large/2379/8476142970" alt="程序员在互联网公司和行业软件公司工作，有什么区别?" /></span><span class="text">程序员在互联网公司和行业软件公司工作，有什么区别?</span><span class="muted">2015-03-13</span><span class="muted"></span></a></li>
+</ul></div><div class="widget d_tag"><h3 class="widget_tit">标签云</h3><div class="d_tags"><a href="http://www.androidchina.net/tag/app">APP (29)</a><a href="http://www.androidchina.net/tag/%e7%a8%8b%e5%ba%8f%e5%91%98">程序员 (23)</a><a href="http://www.androidchina.net/tag/%e5%88%9b%e4%b8%9a">创业 (20)</a><a href="http://www.androidchina.net/tag/app%e6%8e%a8%e5%b9%bf">App推广 (19)</a><a href="http://www.androidchina.net/tag/android-studio">Android Studio (17)</a><a href="http://www.androidchina.net/tag/gradle">Gradle (11)</a><a href="http://www.androidchina.net/tag/%e5%be%ae%e4%bf%a1">微信 (11)</a><a href="http://www.androidchina.net/tag/%e4%ba%a7%e5%93%81%e7%bb%8f%e7%90%86">产品经理 (10)</a><a href="http://www.androidchina.net/tag/%e4%ba%a7%e5%93%81">产品 (9)</a><a href="http://www.androidchina.net/tag/html5">HTML5 (9)</a><a href="http://www.androidchina.net/tag/%e4%ba%92%e8%81%94%e7%bd%91">互联网 (9)</a><a href="http://www.androidchina.net/tag/android%e5%bc%80%e5%8f%91">Android开发 (8)</a><a href="http://www.androidchina.net/tag/%e5%b8%82%e5%9c%ba">市场 (8)</a><a href="http://www.androidchina.net/tag/google-play">Google Play (8)</a><a href="http://www.androidchina.net/tag/%e6%8e%a8%e5%b9%bf">推广 (8)</a><a href="http://www.androidchina.net/tag/%e6%96%b0%e6%89%8b%e5%85%a5%e9%97%a8">新手入门 (6)</a><a href="http://www.androidchina.net/tag/%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7">开发工具 (6)</a><a href="http://www.androidchina.net/tag/%e4%b8%ad%e5%a5%96%e7%94%a8%e6%88%b7">中奖用户 (6)</a><a href="http://www.androidchina.net/tag/o2o">O2O (6)</a><a href="http://www.androidchina.net/tag/android%e6%89%8b%e6%9c%ba">Android手机 (5)</a><a href="http://www.androidchina.net/tag/%e5%bc%80%e5%8f%91%e8%80%85">开发者 (5)</a><a href="http://www.androidchina.net/tag/%e7%94%a8%e6%88%b7%e4%bd%93%e9%aa%8c">用户体验 (5)</a><a href="http://www.androidchina.net/tag/listview">ListView (5)</a><a href="http://www.androidchina.net/tag/java-2">java (5)</a><a href="http://www.androidchina.net/tag/%e8%bf%90%e8%90%a5">运营 (5)</a><a href="http://www.androidchina.net/tag/app%e8%ae%be%e8%ae%a1">APP设计 (5)</a><a href="http://www.androidchina.net/tag/facebook">Facebook (5)</a><a href="http://www.androidchina.net/tag/%e9%9d%a2%e8%af%95">面试 (4)</a><a href="http://www.androidchina.net/tag/android">Android (4)</a><a href="http://www.androidchina.net/tag/android-5-0">Android 5.0 (4)</a></div></div><div class="widget d_banner"><div class="d_banner_inner"><script type="text/javascript">
+    /*360*300 创建于 2015-07-04*/
+    var cpro_id = "u2187876";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+</div></div><div class="widget widget_links"><h3 class="widget_tit">Android开发者服务</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://developer.android.com/index.html" target="_blank">Android Developers</a></li>
+<li><a href="http://www.android-studio.org/" target="_blank">Android Studio 中文社区</a></li>
+<li><a href="http://www.androiddevtools.cn/" target="_blank">AndroidDevTools</a></li>
+<li><a href="https://www.dropbox.com/developers" target="_blank">Dropbox云存储</a></li>
+<li><a href="http://www.eoeandroid.com/portal.php" target="_blank">eoe Android</a></li>
+<li><a href="http://www.faceplusplus.com.cn/" target="_blank">Face++</a></li>
+<li><a href="http://sharesdk.cn/" target="_blank">ShareSDK</a></li>
+<li><a href="http://www.testbird.com/" target="_blank">TestBird手游测试</a></li>
+<li><a href="http://www.qiniu.com/" target="_blank">七牛云存储</a></li>
+<li><a href="http://dev.igetui.com/login.htm" target="_blank">个推开放平台</a></li>
+<li><a href="http://dev.10086.cn/iap?from=zlkiap02" target="_blank">中国移动应用内计费</a></li>
+<li><a href="http://www.testin.cn/portal.action?op=Portal.index" target="_blank">云测 Testin</a></li>
+<li><a href="http://dev.hivoice.cn/usc.jsp" target="_blank">云知声语音云平台</a></li>
+<li><a href="http://www.umeng.com/" target="_blank">友盟</a></li>
+<li><a href="http://www.apkbus.com/" target="_blank">安卓巴士</a></li>
+<li><a href="https://openhome.alipay.com/doc/docIndex.htm" target="_blank">支付宝（移动快捷支付）</a></li>
+<li><a href="http://fanyi.youdao.com/openapi" target="_blank">有道翻译API</a></li>
+<li><a href="https://www.jpush.cn/" target="_blank">极光推送</a></li>
+<li><a href="http://www.bangcle.com/" target="_blank">棒棒加固</a></li>
+<li><a href="http://www.ijiami.cn/" target="_blank">爱加密</a></li>
+<li><a href="http://developer.baidu.com/map/" target="_blank">百度地图</a></li>
+<li><a href="http://open.voicecloud.cn/speechservice" target="_blank">科大讯飞语音平台</a></li>
+<li><a href="http://wiki.connect.qq.com/sdk%E4%B8%8B%E8%BD%BD" target="_blank">腾讯QQ互联平台</a></li>
+<li><a href="https://developers.google.com/" target="_blank">谷歌地图</a></li>
+<li><a href="http://developer.amap.com/">高德地图</a></li>
+
+	</ul>
+</div>
+<div class="widget widget_links"><h3 class="widget_tit">Android广告平台</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.91doujin.com/" target="_blank">91斗金移动广告平台</a></li>
+<li><a href="http://www.google.cn/ads/admob/" target="_blank">admob</a></li>
+<li><a href="http://www.adview.cn/" target="_blank">AdView</a></li>
+<li><a href="http://www.iadpush.com/" target="_blank">iadpush</a></li>
+<li><a href="http://www.waps.cn/" target="_blank">万普世纪</a></li>
+<li><a href="http://www.limei.com/developer" target="_blank">力美广告平台</a></li>
+<li><a href="http://www.wooboo.com.cn/" target="_blank">哇棒广告</a></li>
+<li><a href="http://www.domob.cn/" target="_blank">多盟广告</a></li>
+<li><a href="http://www.adwo.com/" target="_blank">安沃（Adwo）</a></li>
+<li><a href="http://www.wqmobile.com/" target="_blank">帷千动媒广告</a></li>
+<li><a href="http://mobile.adchina.com/" target="_blank">易传媒广告</a></li>
+<li><a href="http://www.yijifen.com/index.jsp" target="_blank">易积分</a></li>
+<li><a href="http://www.youmi.net/" target="_blank">有米广告</a></li>
+<li><a href="http://www.guohead.com/home.html" target="_blank">果合广告聚合</a></li>
+<li><a href="http://www.dianjoy.com/" target="_blank">点乐广告</a></li>
+<li><a href="http://munion.baidu.com/" target="_blank">百度移动联盟</a></li>
+<li><a href="http://www.mobisage.cn/" target="_blank">艾德思奇广告</a></li>
+<li><a href="http://www.adsmogo.com/" target="_blank">芒果</a></li>
+<li><a href="http://www.adsmogo.com/" target="_blank">芒果移动广告优化平台</a></li>
+<li><a href="http://www.qumi.com/">趣米移动广告</a></li>
+<li><a href="http://push.daoyoudao.com/developer.jsp" target="_blank">道有道广告平台</a></li>
+<li><a href="http://www.kuguopush.com/" target="_blank">酷果</a></li>
+
+	</ul>
+</div>
+<div class="widget widget_links"><h3 class="widget_tit">友情链接</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.javaapk.com/" target="_blank">JavaApk</a></li>
+<li><a href="http://www.looip.cn/?q=38" target="_blank">极客邦SOHO</a></li>
+<li><a href="http://www.90159.com/" target="_blank">程序员头条</a></li>
+<li><a href="http://www.newbiefly.com" target="_blank">菜鸟要飞</a></li>
+
+	</ul>
+</div>
+</aside></section>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="copyright pull-left">
+            版权所有，保留一切权利！ &copy; 2016 <a href="http://www.androidchina.net">Android开发中文站</a>　Theme <a href="http://www.daqianduan.com/" target="_blank">D8</a>
+        </div>
+        <div class="trackcode pull-right">
+            <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48543998-1', 'androidchina.net');
+  ga('send', 'pageview');
+
+</script>        </div>
+    </div>
+</footer>
+<script type='text/javascript' src='http://www.androidchina.net/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='http://www.androidchina.net/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.androidchina.net/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.androidchina.net/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '帮助';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '无法找到Brush：';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush不能设置 html-script选项';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://www.androidchina.net/wp-content/themes/d8/js/jquery.js?ver=3.0'></script>
+<script type='text/javascript' src='http://www.androidchina.net/wp-content/plugins/smartideo/static/smartideo.js?ver=2.0.4'></script>
+<script id="bdshare_js" data="type=tools&amp;uid=13688" ></script><script id="bdshell_js"></script><script>document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();</script></body>
+</html>
